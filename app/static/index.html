@@ -1,0 +1,1267 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Quant 시스템 v1 (Kiwoom)</title>
+<style>
+:root{--bg:#06111c;--panel:#0b2032;--panel2:#10283b;--line:#27465f;--txt:#eaf6ff;--muted:#9bb0c2;--blue:#14a7ff;--green:#23e04d;--red:#ff3838;--orange:#ff9b00;--cyan:#22d5ff}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 50% 0,#122b40 0,#071522 38%,#030a12 100%);color:var(--txt);font-family:Arial,'Malgun Gothic',sans-serif;font-weight:700;overflow-x:hidden}.app{min-height:100vh;display:flex;flex-direction:column}.top{min-height:58px;display:flex;align-items:center;padding:0 12px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#06101a,#071625 60%,#07121d);gap:12px}.mainnav{min-height:48px;display:flex;align-items:center;gap:8px;background:transparent;border:0;margin-right:auto;flex-wrap:wrap}.top-actions{margin-left:auto;display:flex;align-items:center;gap:8px}.appkey{display:flex;align-items:center;gap:6px;min-width:140px;justify-content:center}.appkey .label{font-size:11px;color:#eff8ff;line-height:1}.appkey .date{font-size:15px;color:var(--orange);line-height:1.05}.pill{border:0;background:#06a53c;border-radius:9px;padding:5px 8px;color:white;box-shadow:inset 0 0 14px #61ff9655,0 2px 6px #0008;font-size:12px;font-weight:900;display:inline-flex;align-items:center;gap:5px;min-width:48px;min-height:34px;justify-content:center;line-height:1.05}.pill.off{background:#536373}.pill.live{background:#d33a45}.dot{width:15px;height:15px;background:#dfffe8;border-radius:50%;display:inline-block;box-shadow:0 0 7px #aeffc4}.clock{display:none}.tab{padding:10px 16px;border:1px solid #203c54;border-radius:12px;color:#eaf6ff;font-size:17px;cursor:pointer;display:flex;align-items:center;gap:6px;background:linear-gradient(180deg,#0b2032,#071522);box-shadow:inset 0 0 16px #1b395033}.tab:hover{border-color:#1dafff;color:#fff}.tab.active{color:var(--blue);border-color:var(--blue);background:linear-gradient(180deg,#12334b,#0b2032);box-shadow:0 0 0 1px #14a7ff55,inset 0 0 18px #14a7ff22}.wrap{padding:10px 12px 0;flex:1}.page-title{display:none}.cards{display:grid;grid-template-columns:1fr 1fr .82fr 1.08fr .92fr .72fr;gap:18px}.card,.panel{background:linear-gradient(180deg,#10283b,#0a1b2a);border:1px solid var(--line);border-radius:7px;box-shadow:inset 0 0 30px #1b395010,0 1px 5px #0006}.card{height:106px;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;overflow:visible;padding:10px}.card-head{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:4px}.card .ico{position:static;color:var(--blue);font-size:22px}.card .title{font-size:15px}.big{font-size:24px;margin:3px 0;color:#fff}.card .accent{color:var(--green)}.sub{font-size:14px;color:#d5e8f6}.blue{color:var(--blue)!important}.green{color:var(--green)!important}.red{color:var(--red)!important}.orange{color:var(--orange)!important}.cyan{color:var(--cyan)!important}.muted{color:var(--muted)!important}.grid{display:grid;grid-template-columns:1.25fr .92fr .88fr;gap:10px;margin-top:10px}.grid2{display:grid;grid-template-columns:1.25fr .68fr .56fr .62fr;gap:10px;margin-top:10px}.grid3{display:grid;grid-template-columns:.9fr .8fr;gap:10px;margin-top:10px}.panel{padding:10px;min-width:0}.panel h2{font-size:18px;margin:0 0 8px}.panel .more{float:right;color:#cfe4f5;border:1px solid #223d56;border-radius:5px;padding:2px 8px;font-size:13px}table{width:100%;border-collapse:collapse;font-size:14px}th,td{border:1px solid #27465f;padding:7px 8px;text-align:center;white-space:nowrap}th{background:#142d41;color:#f5fbff}td{background:#0b2133aa}.left{text-align:left}.badge{padding:3px 8px;border-radius:5px;color:white;font-size:12px;background:#15983d}.badge.gray{background:#7b8997}.badge.redbg{background:#ad2936}.metric{font-size:18px}.spark{width:95px;height:24px}.mini-card{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center}.barrow{display:grid;grid-template-columns:92px 1fr 70px;gap:8px;align-items:center;margin:7px 0}.barbox{height:8px;background:#263d52;border-radius:20px;overflow:hidden}.bar{height:100%;background:#e3414f}.footer{height:44px;border-top:1px solid var(--line);display:flex;align-items:center;padding:0 14px;gap:28px;background:#071522}.footer .right{margin-left:auto;display:flex;gap:28px}.hidden{display:none}.actions{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.input{width:100%;padding:10px;border:1px solid #31546f;border-radius:6px;background:#071522;color:#eaf6ff}.formgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}button{cursor:pointer;border:0;border-radius:7px;background:#06962d;color:white;font-weight:900;padding:10px 14px}.btn-red{background:#b12d38}.btn-blue{background:#086bb1}.pre{white-space:pre-wrap;background:#071522;border:1px solid #31546f;border-radius:8px;padding:12px;min-height:220px;max-height:520px;overflow:auto}.equity-chart{width:100%;height:250px;background:linear-gradient(180deg,#0b2032,#071522);border:1px solid #18374f;border-radius:6px;overflow:hidden}.equity-chart svg{display:block;width:100%;height:100%;background:transparent}.settings-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.box{border:1px solid #284b64;border-radius:8px;background:#0d2436;padding:12px;text-align:center}.small{font-size:12px}.toast{position:fixed;right:18px;bottom:18px;background:#0d2436;border:1px solid var(--line);padding:12px 16px;border-radius:10px;box-shadow:0 12px 35px #0008;display:none;max-width:520px;z-index:99}@media(max-width:1350px){.cards,.grid,.grid2,.grid3{grid-template-columns:1fr 1fr}.tab{padding:18px 14px}.formgrid{grid-template-columns:1fr 1fr}.settings-grid{grid-template-columns:1fr 1fr}}@media(max-width:900px){.top{height:auto;align-items:flex-start;flex-direction:column;padding:0}.mainnav{height:auto;flex-wrap:wrap}.top-actions{margin-left:0;flex-wrap:wrap;padding:8px}.cards,.grid,.grid2,.grid3,.formgrid,.settings-grid{grid-template-columns:1fr}.footer{height:auto;flex-wrap:wrap;padding:12px}}
+
+/* v27.3 layout fixes */
+.grid{grid-template-columns:30% 22% 48%;align-items:start}
+.positions-panel,.strategies-panel{height:auto;min-height:360px;overflow:visible}
+.events-panel{height:360px;overflow-y:auto}
+.schedule-panel{height:190px;overflow:hidden}
+.positions-panel table,.strategies-panel table{table-layout:auto;font-size:13px}
+.positions-panel th,.positions-panel td,.strategies-panel th,.strategies-panel td{padding:7px 5px}
+.grid2{grid-template-columns:1.9fr 1fr;gap:10px}
+.equity-chart{height:300px;background:linear-gradient(180deg,#0b2032,#071522)}
+.indices-list{display:flex;flex-direction:column;gap:11px;margin-top:8px}.idx-row{display:grid;grid-template-columns:90px 90px 70px 96px;align-items:center;gap:8px}.idx-name{font-size:16px}.idx-val{text-align:right;font-size:17px}.idx-chg{text-align:right;font-size:13px}.sparkline{height:34px;width:94px}.grid3{grid-template-columns:1fr;max-width:540px}.sector-card{padding:12px 14px}.sector-tabs{display:inline-flex;margin-left:18px;border:1px solid #223d56;border-radius:5px;overflow:visible;vertical-align:middle}.sector-tabs span{padding:5px 12px;font-size:13px;color:#aebfd0}.sector-tabs span.active{background:#0b6ea8;color:#23c7ff}.barrow{grid-template-columns:95px 1fr 70px;margin:8px 0}.barbox{height:9px;border-radius:1px;background:transparent}.bar{border-radius:1px;background:#e9414f}.footer{gap:0;justify-content:space-between}.footer span{flex:1;text-align:center;min-width:0;padding:0 6px}.footer span{color:#c7d8e5}.footer b{color:#eaf6ff}.footer .right{gap:18px}.footer-note{display:none}.report-log{margin-top:10px}.report-log table{font-size:13px}.ws-manual-off{color:#ff9b00!important}
+
+/* v27.4 requested UI fixes */
+.mainnav{gap:8px;padding:8px 14px;background:linear-gradient(180deg,#082036,#061827);border-bottom:1px solid var(--line)}
+.tab{border:1px solid #1b3f5c;border-radius:14px;background:linear-gradient(180deg,#0e2a42,#071b2b);box-shadow:inset 0 1px 0 #ffffff13,0 8px 22px #0004;margin:0;padding:11px 18px;min-width:128px;justify-content:center;gap:8px;color:#dcefff}
+.tab.active{background:linear-gradient(180deg,#0c80bd,#064e7c);color:white;border-color:#0db7ff;box-shadow:0 0 0 1px #0db7ff55 inset,0 8px 24px #009cff25}
+.navico{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:8px;background:#102f49;color:#2bd5ff;font-weight:900;box-shadow:inset 0 0 0 1px #2bd5ff55}.tab.active .navico{background:#eaf8ff;color:#0570ad}.top-actions .pill{min-width:74px;height:34px;padding:4px 10px;font-size:14px;border-radius:11px}.top-actions .pill .dot{width:20px;height:20px}.appkey{height:40px}.topdata-grid{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-top:10px;align-items:stretch}.twothirds-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:10px}.events-stack{display:grid;grid-template-rows:1fr;gap:10px}.positions-panel,.strategies-panel{min-height:430px;height:430px;overflow:hidden}.events-panel{height:430px;overflow-y:auto}.schedule-panel{display:none!important}.positions-panel table,.strategies-panel table{font-size:14px}.positions-panel th,.positions-panel td,.strategies-panel th,.strategies-panel td{padding:9px 7px}.bottomdata-grid{display:grid;grid-template-columns:1.35fr .74fr .82fr;gap:10px;margin-top:10px;align-items:stretch}.equity-panel,.indices-panel,.sector-card{height:330px}.equity-chart{height:275px}.sector-card{max-width:none}.grid,.grid2{display:none}.cards .card:last-child .sub{display:none}
+@media(max-width:1350px){.topdata-grid,.twothirds-grid,.bottomdata-grid{grid-template-columns:1fr}.positions-panel,.strategies-panel,.events-panel,.schedule-panel,.equity-panel,.indices-panel,.sector-card{height:auto;min-height:0}.equity-chart{height:260px}.tab{min-width:auto}}
+
+
+/* v27.5 restore backtest + remove system card */
+.cards{grid-template-columns:1fr 1fr .82fr 1.08fr .92fr .92fr .72fr!important}
+.backtest-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:10px;margin-top:10px}.auto-wide .backtest-grid{margin-top:0}
+.backtest-wide{grid-column:1 / -1}
+.metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.metricbox{border:1px solid #284b64;background:#0d2436;border-radius:8px;padding:12px;text-align:center}
+.navico{font-size:16px;background:linear-gradient(180deg,#164363,#0b263b)}
+.toast{font-size:14px;line-height:1.4}
+@media(max-width:1200px){.backtest-grid,.metric-grid{grid-template-columns:1fr}}
+
+/* v27.6 live data/layout fixes */
+.topdata-grid{grid-template-columns:2fr 1fr!important;align-items:start}
+.twothirds-grid{grid-template-columns:1fr!important}
+.strategies-panel{display:none!important}
+.positions-panel{height:auto;min-height:430px;overflow:visible}
+.events-panel{height:430px;overflow-y:auto}
+.schedule-panel{display:none!important}
+.bottomdata-grid{grid-template-columns:1.35fr .78fr .82fr!important;margin-top:10px}
+.auto-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:10px;margin-top:10px}.auto-wide{grid-column:1/-1}.auto-metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.auto-metric{border:1px solid #284b64;background:#0d2436;border-radius:8px;padding:12px;text-align:center}.sector-tabs span{cursor:pointer}.sector-tabs span.active{background:#0b6ea8;color:#23c7ff}.sector-tabs span:not(.active):hover{color:white;background:#12334b}
+@media(max-width:1350px){.topdata-grid,.bottomdata-grid,.auto-grid{grid-template-columns:1fr!important}}
+
+/* v27.8 balance 04 UI fixes */
+.cards .card:nth-child(1) .ico,.cards .card:nth-child(4) .ico{transform:translateY(-4px)}
+.positions-panel{overflow:auto!important}
+.positions-panel table{min-width:1180px}
+
+/* v27.9 requested bottom cards 3/4 height + realtime render fix */
+.equity-panel,.indices-panel,.sector-card{height:207px!important}
+.equity-chart{height:172px!important}
+.indices-list{gap:6px!important}
+.idx-row{grid-template-columns:80px 76px 62px 76px!important;font-size:12px}
+.sparkline{height:22px!important;width:76px!important}
+.sector-card .barrow{margin:5px 0!important}
+
+
+/* v27.13 bottom live cards + settings/report/raw summary */
+.bottomdata-grid h2{font-size:12px!important;line-height:1.15!important;margin-bottom:5px!important}
+.equity-panel,.indices-panel,.sector-card{height:207px!important}
+.equity-chart{height:172px!important}
+.raw-summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px}
+.raw-summary-card{border:1px solid #284b64;background:linear-gradient(180deg,#123149,#0b2234);border-radius:10px;padding:11px;text-align:center;min-height:74px}
+.raw-summary-card b{display:block;font-size:13px;color:#cfe7f8;margin-bottom:5px}.raw-summary-card p{margin:0;font-size:17px;color:#22d5ff}.raw-summary-card small{display:block;color:#9bb0c2;margin-top:3px}
+.report-table{width:100%;margin-bottom:10px}
+.settings-env-card{display:none!important}
+@media(max-width:1350px){.raw-summary-grid{grid-template-columns:1fr!important}}
+
+
+/* v27.15 operation schedule/menu relocation */
+.positions-panel{overflow:visible!important;height:auto!important;min-height:0!important}
+.positions-panel table{min-width:0!important;width:100%!important;table-layout:fixed!important;font-size:11.5px!important}
+.positions-panel th,.positions-panel td{padding:4px 3px!important;letter-spacing:-.4px!important;}
+.positions-panel th:nth-child(1),.positions-panel td:nth-child(1){width:18%}
+.positions-panel th:nth-child(n+2),.positions-panel td:nth-child(n+2){width:9.1%}
+.manual-control-card .actions{display:grid;grid-template-columns:repeat(4,minmax(120px,1fr));gap:8px}
+.manual-control-card button{min-height:42px}
+.exchange-card{grid-column:1/-1}
+.exchange-table{font-size:12.5px!important;table-layout:fixed!important}
+.exchange-table th,.exchange-table td{padding:7px 6px!important;white-space:normal!important;line-height:1.35!important;vertical-align:middle}
+.exchange-table th:nth-child(1),.exchange-table td:nth-child(1){width:10%}
+.exchange-table th:nth-child(2),.exchange-table td:nth-child(2){width:13%}
+.exchange-table th:nth-child(3),.exchange-table td:nth-child(3){width:13%}
+.exchange-table th:nth-child(4),.exchange-table td:nth-child(4){width:12%}
+.exchange-table th:nth-child(5),.exchange-table td:nth-child(5){width:12%}
+.exchange-table tr.active td{background:#103d55!important;box-shadow:inset 3px 0 0 #22d5ff;color:#fff}
+.exchange-status{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.exchange-status .box{padding:9px;min-height:62px}
+.report-preview-removed{display:none!important}
+@media(max-width:1350px){.manual-control-card .actions,.exchange-status{grid-template-columns:1fr 1fr}.positions-panel table{font-size:11px!important}}
+
+
+/* v27.16 layout/menu/report refinements */
+.ops-body-grid{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-top:10px;align-items:start}
+.ops-left-stack,.ops-right-stack{display:grid;grid-template-columns:1fr;gap:10px;align-items:start}
+.positions-panel{height:640px!important;min-height:640px!important;overflow:visible!important;display:flex;flex-direction:column}
+.positions-panel table{flex:1;width:100%!important;min-width:0!important;table-layout:fixed!important;font-size:10.2px!important;line-height:1.12!important}
+.positions-panel th,.positions-panel td{padding:3px 2px!important;letter-spacing:-.7px!important;}
+.positions-panel th:nth-child(1),.positions-panel td:nth-child(1){width:18%!important}
+.positions-panel th:nth-child(2),.positions-panel td:nth-child(2){width:5.6%!important}
+.positions-panel th:nth-child(3),.positions-panel td:nth-child(3){width:9.2%!important}
+.positions-panel th:nth-child(4),.positions-panel td:nth-child(4){width:9.2%!important}
+.positions-panel th:nth-child(5),.positions-panel td:nth-child(5){width:10%!important}
+.positions-panel th:nth-child(6),.positions-panel td:nth-child(6){width:10%!important}
+.positions-panel th:nth-child(7),.positions-panel td:nth-child(7){width:9.4%!important}
+.positions-panel th:nth-child(8),.positions-panel td:nth-child(8){width:7.6%!important}
+.positions-panel th:nth-child(9),.positions-panel td:nth-child(9){width:9.4%!important}
+.positions-panel th:nth-child(10),.positions-panel td:nth-child(10){width:5.6%!important}
+.bottomdata-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:10px!important;margin-top:0!important;align-items:stretch!important}
+.equity-panel,.indices-panel,.sector-card{height:207px!important;min-height:207px!important}
+.equity-chart{height:172px!important}
+.auto-status-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;align-items:stretch}
+.auto-status-row .auto-metric-grid,.auto-status-row .exchange-status{margin:0!important;height:100%;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.exchange-card{grid-column:1/-1!important}
+.auto-trade-panel{grid-column:1/-1!important;margin-bottom:10px}
+.auto-trade-panel table{font-size:13px;table-layout:fixed}
+.auto-trade-panel th,.auto-trade-panel td{padding:7px 6px!important}
+.manual-control-card{display:none!important}
+.report-actions{display:none!important}
+@media(max-width:1350px){.ops-body-grid,.auto-status-row{grid-template-columns:1fr!important}.positions-panel{height:auto!important;min-height:0!important}.auto-status-row .auto-metric-grid,.auto-status-row .exchange-status{grid-template-columns:1fr 1fr!important}}
+
+
+/* v27.17 positions style + ws detail table */
+.positions-panel{height:640px!important;min-height:640px!important;overflow-y:auto!important;overflow-x:hidden!important;display:flex;flex-direction:column}
+.positions-panel table{width:100%!important;min-width:0!important;table-layout:auto!important;font-size:14px!important;line-height:1.35!important;border-collapse:collapse!important}
+.positions-panel th,.positions-panel td{padding:8px 8px!important;letter-spacing:0!important;vertical-align:middle!important}
+.positions-panel th{background:#142d41!important;color:#f5fbff!important}
+.positions-panel td{background:#0b2133aa!important}
+.positions-panel .blank-row td{height:38px!important;color:transparent!important}
+.positions-panel th:nth-child(1),.positions-panel td:nth-child(1){width:auto!important;min-width:150px!important}
+.positions-panel th:nth-child(2),.positions-panel td:nth-child(2){width:auto!important;min-width:58px!important}
+.positions-panel th:nth-child(10),.positions-panel td:nth-child(10){width:auto!important;min-width:64px!important}
+.ws-detail-panel{grid-column:1/-1!important;margin-bottom:10px!important}
+.ws-detail-table{table-layout:fixed!important;font-size:13px!important}
+.ws-detail-table th,.ws-detail-table td{padding:7px 9px!important}
+.ws-detail-table th:nth-child(1),.ws-detail-table td:nth-child(1){width:28%!important}
+.ws-detail-table th:nth-child(2),.ws-detail-table td:nth-child(2){width:22%!important}
+.ws-detail-table th:nth-child(3),.ws-detail-table td:nth-child(3){width:50%!important}
+@media(max-width:1350px){.positions-panel{height:520px!important}.positions-panel table{font-size:13px!important}.positions-panel th,.positions-panel td{padding:7px 6px!important}}
+
+
+/* v27.18 positions bottom alignment + remove auto WebSocket detail table */
+.ops-body-grid{align-items:stretch!important}
+.ops-left-stack,.ops-right-stack{height:100%!important}
+.positions-panel{height:647px!important;min-height:647px!important;max-height:647px!important;overflow-y:auto!important;overflow-x:hidden!important}
+.ws-detail-panel{display:block!important}
+.ws-detail-table{display:table!important}
+@media(max-width:1350px){.positions-panel{height:520px!important;min-height:520px!important;max-height:none!important}}
+
+
+/* v27.20 auto layout compact + positions bottom +1mm */
+.positions-panel{height:651px!important;min-height:651px!important;max-height:651px!important;}
+.auto-status-row{display:grid!important;grid-template-columns:1fr!important;gap:8px!important;margin-bottom:10px!important;align-items:stretch!important}
+.auto-status-row .auto-metric-grid,.auto-status-row .exchange-status{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:10px!important;margin:0!important;height:auto!important}
+.auto-metric,.exchange-status .box{min-height:72px!important;height:72px!important;padding:6px 8px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;line-height:1.25!important}
+.auto-metric b,.exchange-status .box b{font-size:15px!important;line-height:1.25!important;margin:0 0 4px!important}
+.auto-metric p,.exchange-status .box p{font-size:15px!important;line-height:1.25!important;margin:2px 0!important}
+.auto-metric small,.exchange-status .box small{font-size:12px!important;line-height:1.25!important;margin-top:3px!important}
+.auto-stack{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;margin-top:10px!important}
+.auto-trade-panel{grid-column:auto!important;margin:0!important}
+.backtest-grid{margin-top:0!important}
+.ws-detail-panel{grid-column:auto!important;margin-bottom:0!important}
+@media(max-width:1350px){.positions-panel{height:524px!important;min-height:524px!important;max-height:none!important}.auto-status-row .auto-metric-grid,.auto-status-row .exchange-status{grid-template-columns:1fr 1fr!important}}
+
+
+/* v27.21 settings exclusion cards + 6 investment type cards */
+.settings-stack{display:flex;flex-direction:column;gap:10px}
+.exclude-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:10px}
+.exclude-card{border:1px solid #284b64;background:#0d2436;border-radius:12px;min-height:112px;padding:10px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:space-between}
+.exclude-title{font-size:15px;line-height:1.2;color:#f5fbff}
+.exclude-value{font-size:16px;color:#0066ff;font-weight:900}
+.switch-mini{min-width:54px;border-radius:18px;padding:5px 10px;font-size:12px;background:#13a047;color:white}.switch-mini.off{background:#8b97a5}
+.invest-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:10px}
+.invest-card{border:1px solid #284b64;background:#0d2436;border-radius:10px;padding:10px;text-align:center;min-height:160px}
+.invest-card h3{margin:0 0 8px;color:#22d5ff}.invest-card p{margin:5px 0;font-size:12.5px;color:#d8eaf6}
+.api-policy-table{margin-top:10px}
+@media(max-width:1350px){.invest-grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:900px){.invest-grid{grid-template-columns:1fr}.exclude-grid{grid-template-columns:repeat(2,1fr)}}
+
+
+/* v27.22 requested operation/auto fixes */
+.white{color:#ffffff!important}
+.card .big.red,.card .sub.red{color:var(--red)!important}
+.card .big.blue,.card .sub.blue{color:var(--blue)!important}
+.card .big.white,.card .sub.white{color:#ffffff!important}
+.positions-panel td.red{color:var(--red)!important}
+.positions-panel td.blue{color:var(--blue)!important}
+.auto-status-row{display:grid!important;grid-template-columns:repeat(8,minmax(0,1fr))!important;gap:10px!important;margin-bottom:10px!important;align-items:stretch!important}
+.auto-status-row .auto-metric-grid,.auto-status-row .exchange-status{display:contents!important}
+.auto-metric,.exchange-status .box{min-width:0!important;width:100%!important;height:72px!important;min-height:72px!important}
+.auto-metric b,.exchange-status .box b{font-size:14px!important;white-space:nowrap!important}
+.auto-metric p,.exchange-status .box p{font-size:14px!important;white-space:nowrap!important}
+.auto-metric small,.exchange-status .box small{font-size:11px!important;white-space:nowrap!important}
+@media(max-width:1350px){.auto-status-row{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+@media(max-width:900px){.auto-status-row{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+.backtest-grid .ws-detail-panel{grid-column:1/-1!important;margin-bottom:0!important}.footer{justify-content:space-between!important;gap:0!important}.footer span{flex:1 1 0!important;text-align:center!important}
+
+
+/* v27.24 ChatGPT Image 2026-07-02 auto dashboard coding */
+.auto-dashboard{display:flex;flex-direction:column;gap:10px}.auto-summary-title{font-size:18px;font-weight:900;margin:0 0 -2px 2px}.auto-hero-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px}.auto-hero-card{height:96px;border:1px solid var(--line);border-radius:7px;background:linear-gradient(180deg,#10283b,#0a1b2a);display:grid;grid-template-columns:44px 1fr;align-items:center;padding:10px 12px;box-shadow:inset 0 0 28px #1b395020}.auto-hero-card .hero-ico{font-size:30px;text-align:center;color:var(--cyan)}.auto-hero-card b{font-size:15px;display:block}.auto-hero-card p{font-size:21px;line-height:1.05;margin:4px 0;color:#fff}.auto-hero-card small{font-size:13px;color:#e6f4ff}.auto-main-grid{display:grid;grid-template-columns:2fr .95fr;gap:10px}.auto-right-stack{display:grid;grid-template-rows:auto auto 1fr;gap:10px}.auto-mid-grid{display:grid;grid-template-columns:.74fr 1fr .8fr 1.05fr;gap:10px}.auto-bottom-grid{display:grid;grid-template-columns:1.25fr .9fr .9fr .9fr;gap:10px}.auto-legacy-stack{display:grid;grid-template-columns:1fr;gap:10px}.strategies-live-panel table{font-size:13px}.strategies-live-panel th,.strategies-live-panel td{padding:6px 5px}.auto-dashboard .panel{min-height:0}.auto-dashboard h2{font-size:17px}.risk-ok{color:var(--green)!important}.risk-warn{color:var(--orange)!important}.risk-bad{color:var(--red)!important}.auto-ring{width:116px;height:116px;border:13px solid #24c75a;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:8px auto 0;box-shadow:inset 0 0 16px #0008,0 0 18px #15da5a33}.auto-ring div{font-size:28px}.auto-dashboard .sector-card,.auto-dashboard .indices-panel{height:auto}.auto-dashboard .idx-row{grid-template-columns:78px 82px 72px 84px}.auto-dashboard .sparkline{width:82px}.auto-dashboard .barrow{grid-template-columns:90px 1fr 64px}.auto-dashboard .pre{max-height:260px;min-height:160px}.settings-invest-table th,.settings-invest-table td{font-size:13px;padding:8px 6px}.formula-status{font-size:13px;color:var(--green)}
+@media(max-width:1500px){.auto-hero-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.auto-main-grid,.auto-mid-grid,.auto-bottom-grid{grid-template-columns:1fr 1fr}.auto-right-stack{grid-template-rows:auto}}@media(max-width:900px){.auto-hero-grid,.auto-main-grid,.auto-mid-grid,.auto-bottom-grid{grid-template-columns:1fr}.auto-hero-card{grid-template-columns:38px 1fr}}
+
+
+/* v27.25 requested chart/auto layout cleanup */
+.position-chart-slot{display:grid;grid-template-columns:1fr;gap:10px;margin-top:10px}
+.position-price-panel{height:330px;min-height:330px;overflow:hidden}
+.position-price-chart{height:258px}
+.pos-link{color:#eaf6ff;text-decoration:none;cursor:pointer;display:inline-block;width:100%;overflow:visible;white-space:nowrap}
+.pos-link:hover{color:var(--cyan);text-decoration:underline}
+.auto-summary-title{display:none!important}
+.auto-hero-grid{grid-template-columns:repeat(8,minmax(150px,1fr))!important;gap:10px!important}
+.auto-hero-card{min-width:0!important;grid-template-columns:34px minmax(0,1fr)!important;padding:10px!important}
+.auto-hero-card .hero-ico{font-size:26px!important}.auto-hero-card b{font-size:14px!important;white-space:nowrap!important}.auto-hero-card p{font-size:20px!important;}.auto-hero-card small{font-size:12.5px!important;display:block}
+.strategies-live-panel{overflow:hidden!important}.strategies-live-panel table{table-layout:fixed!important;width:100%!important;font-size:12px!important}.strategies-live-panel th,.strategies-live-panel td{padding:5px 4px!important;overflow:visible!important;white-space:nowrap!important}.strategies-live-panel th:nth-child(1),.strategies-live-panel td:nth-child(1){width:15%}.strategies-live-panel th:nth-child(2),.strategies-live-panel td:nth-child(2){width:5%}.strategies-live-panel th:nth-child(3),.strategies-live-panel td:nth-child(3),.strategies-live-panel th:nth-child(4),.strategies-live-panel td:nth-child(4){width:5.5%}.strategies-live-panel th:nth-child(n+5),.strategies-live-panel td:nth-child(n+5){width:7.2%}
+.auto-main-grid,.auto-mid-grid,.auto-bottom-grid,.auto-legacy-stack{min-width:0}.auto-dashboard .panel{overflow:hidden}.auto-dashboard table{table-layout:fixed}.auto-dashboard th,.auto-dashboard td{overflow:visible;white-space:nowrap}.auto-mid-grid{grid-template-columns:.78fr 1.08fr .82fr 1.03fr!important}.auto-bottom-grid{grid-template-columns:1.2fr .9fr .85fr!important}.auto-dashboard .barrow{grid-template-columns:78px minmax(80px,1fr) 58px!important}.auto-dashboard .idx-row{grid-template-columns:68px 72px 62px 70px!important;gap:5px!important}.auto-dashboard .idx-name,.auto-dashboard .idx-val{font-size:13px!important}.auto-dashboard .idx-chg{font-size:11px!important}.auto-dashboard .sparkline{width:68px!important}.ws-detail-table td:nth-child(3){text-align:left!important;white-space:normal!important}
+@media(max-width:1500px){.auto-hero-grid{grid-template-columns:repeat(4,minmax(160px,1fr))!important}.auto-mid-grid,.auto-bottom-grid{grid-template-columns:1fr 1fr!important}.position-price-panel{height:auto}.position-price-chart{height:240px}}
+@media(max-width:900px){.auto-hero-grid,.auto-mid-grid,.auto-bottom-grid{grid-template-columns:1fr!important}}
+
+
+/* v27.26 운영현황 하단 라인 정렬: 우측 현재가 선그래프 하단을 위로 올려 좌측 보유종목 카드와 맞춤 */
+.ops-body-grid{align-items:start!important}
+.ops-left-stack,.ops-right-stack{height:auto!important}
+.position-chart-slot{margin-top:0!important;gap:0!important}
+.position-price-panel{height:207px!important;min-height:207px!important;max-height:207px!important;overflow:hidden!important}
+.position-price-panel h2{font-size:16px!important;margin-bottom:5px!important}
+.position-price-panel .small{font-size:11px!important;line-height:1.25!important;margin-bottom:4px!important}
+.position-price-chart{height:135px!important}
+@media(max-width:1350px){.position-price-panel{height:auto!important;min-height:0!important;max-height:none!important}.position-price-chart{height:220px!important}}
+
+
+/* v27.27 footer overlap fix */
+.footer{
+  display:grid!important;
+  grid-template-columns:.72fr .72fr 1.35fr .85fr .85fr 1.12fr 1.85fr 1fr!important;
+  gap:10px!important;
+  align-items:center!important;
+  height:44px!important;
+  padding:0 12px!important;
+  overflow:visible!important;
+}
+.footer span{
+  flex:none!important;
+  min-width:0!important;
+  max-width:100%!important;
+  padding:0 4px!important;
+  text-align:center!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  
+  line-height:1.15!important;
+}
+.footer span:hover{overflow:visible!important;position:relative;z-index:10;background:#071522;border-radius:4px}
+@media(max-width:1200px){
+  .footer{height:auto!important;min-height:44px!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;row-gap:6px!important;padding:8px 10px!important}
+}
+@media(max-width:720px){.footer{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+
+
+/* v27.28 전체 말줄임 제거 + 비례 축소/자동 줄바꿈 정책
+   - 프로젝트 전체에서 미사용
+   - 카드/표/버튼/로그/Footer는 내용 전체 표시
+   - 공간 부족 시 가변 폭 → 줄바꿈 → 비례 글자 축소 순서로 대응 */
+:root{
+  --fit-scale:clamp(.72, calc(100vw / 1680), 1);
+  --fit-scale-small:clamp(.64, calc(100vw / 1500), 1);
+}
+*,*::before,*::after{
+  text-overflow:clip!important;
+  overflow-wrap:anywhere;
+  word-break:keep-all;
+}
+body{overflow-x:auto!important}
+.card,.panel,.box,.tab,button,.pill,.footer,.footer span,.top,.top-actions,.mainnav,
+.auto-hero-card,.auto-dashboard .panel,.strategies-live-panel,.positions-panel,.events-panel,
+.position-price-panel,.pre,.toast{
+  overflow:visible!important;
+  max-width:none!important;
+}
+.card,.auto-hero-card,.box{
+  min-width:100%!important;
+  width:auto!important;
+  height:auto!important;
+  min-height:var(--card-min-height,106px)!important;
+}
+.cards,.auto-hero-grid{
+  grid-template-columns:repeat(auto-fit,minmax(210px,auto))!important;
+  justify-content:stretch!important;
+  align-items:stretch!important;
+}
+.card .title,.card .big,.card .sub,.auto-hero-card b,.auto-hero-card p,.auto-hero-card small,
+.footer span,.tab,button,.pill,.pre,td,th{
+  white-space:normal!important;
+}
+.card .big,.auto-hero-card p{font-size:calc(22px * var(--fit-scale))!important;line-height:1.12!important}
+.card .title,.auto-hero-card b{font-size:calc(15px * var(--fit-scale))!important;line-height:1.15!important}
+.card .sub,.auto-hero-card small{font-size:calc(13px * var(--fit-scale))!important;line-height:1.15!important;display:block!important}
+button,.pill{font-size:calc(14px * var(--fit-scale))!important;line-height:1.15!important;min-width:max-content!important;white-space:normal!important}
+.tab{font-size:calc(16px * var(--fit-scale))!important;line-height:1.15!important;min-width:max-content!important}
+.panel{overflow-x:auto!important;overflow-y:visible!important}
+table{table-layout:auto!important;width:max-content!important;min-width:100%!important}
+th,td{white-space:normal!important;overflow:visible!important;font-size:calc(14px * var(--fit-scale-small))!important;line-height:1.25!important;min-width:max-content!important}
+.positions-panel th,.positions-panel td,.strategies-live-panel th,.strategies-live-panel td,
+.auto-dashboard th,.auto-dashboard td{white-space:normal!important;overflow:visible!important;min-width:max-content!important}
+.pos-link{display:inline!important;width:auto!important;white-space:normal!important;overflow:visible!important}
+.pre,.events-panel td,.ws-detail-table td,.toast{white-space:pre-wrap!important;font-size:calc(13px * var(--fit-scale-small))!important;line-height:1.25!important}
+.footer{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  justify-content:space-evenly!important;
+  align-items:center!important;
+  gap:clamp(8px,1.4vw,28px)!important;
+  height:auto!important;
+  min-height:44px!important;
+  padding:8px 12px!important;
+}
+.footer span{
+  flex:0 1 auto!important;
+  min-width:max-content!important;
+  width:auto!important;
+  padding:0 4px!important;
+  font-size:calc(14px * var(--fit-scale-small))!important;
+  line-height:1.15!important;
+  text-align:center!important;
+}
+@media(max-width:1200px){
+  :root{--fit-scale:clamp(.62, calc(100vw / 1300), .9);--fit-scale-small:clamp(.58, calc(100vw / 1200), .86)}
+  .cards,.auto-hero-grid{grid-template-columns:repeat(auto-fit,minmax(180px,auto))!important}
+  .footer{gap:8px!important}
+}
+@media(max-width:720px){
+  :root{--fit-scale:.58;--fit-scale-small:.54}
+  .cards,.auto-hero-grid{grid-template-columns:1fr!important}
+}
+
+
+/* v27.29 no-ellipsis fit-shrink policy
+   화면 폭 부족 시: 개별 카드 폭 축소 → 비례 글자 축소
+   표: 내용은 줄이지 않고 가로/세로 스크롤 생성 */
+:root{
+  --fit-scale:clamp(.58, calc(100vw / 1680), 1);
+  --fit-scale-small:clamp(.54, calc(100vw / 1500), 1);
+}
+*,*::before,*::after{
+  text-overflow:clip!important;
+}
+body{overflow-x:hidden!important}
+.cards,.auto-hero-grid,.auto-status-row{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(0,1fr))!important;
+  gap:clamp(6px,.65vw,12px)!important;
+  align-items:stretch!important;
+}
+.card,.auto-hero-card,.auto-metric,.exchange-status .box,.box{
+  min-width:0!important;
+  width:auto!important;
+  max-width:100%!important;
+  overflow:visible!important;
+}
+.card .title,.card .big,.card .sub,.auto-hero-card b,.auto-hero-card p,.auto-hero-card small,
+.auto-metric b,.auto-metric p,.auto-metric small,.exchange-status .box b,.exchange-status .box p,.exchange-status .box small{
+  white-space:nowrap!important;
+  overflow:visible!important;
+  word-break:keep-all!important;
+  overflow-wrap:normal!important;
+}
+.card .big,.auto-hero-card p{font-size:calc(22px * var(--fit-scale))!important;line-height:1.05!important}
+.card .title,.auto-hero-card b,.auto-metric b,.exchange-status .box b{font-size:calc(15px * var(--fit-scale))!important;line-height:1.08!important}
+.card .sub,.auto-hero-card small,.auto-metric small,.exchange-status .box small{font-size:calc(13px * var(--fit-scale))!important;line-height:1.08!important}
+.auto-hero-card{grid-template-columns:clamp(22px,2.1vw,38px) minmax(0,1fr)!important;padding:clamp(6px,.6vw,10px)!important}
+.auto-hero-card .hero-ico{font-size:calc(28px * var(--fit-scale))!important}
+.footer{
+  display:grid!important;
+  grid-template-columns:.72fr .72fr 1.45fr .85fr .85fr 1.15fr 1.9fr 1fr!important;
+  gap:clamp(4px,.7vw,14px)!important;
+  align-items:center!important;
+  justify-items:center!important;
+  height:auto!important;
+  min-height:44px!important;
+  padding:8px 10px!important;
+  overflow:visible!important;
+}
+.footer span{
+  min-width:0!important;
+  width:100%!important;
+  max-width:100%!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  font-size:calc(14px * var(--fit-scale-small))!important;
+  line-height:1.08!important;
+  text-align:center!important;
+}
+.panel{overflow:visible!important;min-width:0!important}
+.table-scroll,.panel:has(table){overflow:auto!important}
+table{
+  width:max-content!important;
+  min-width:100%!important;
+  table-layout:auto!important;
+}
+th,td,.auto-dashboard th,.auto-dashboard td,.positions-panel th,.positions-panel td,.strategies-live-panel th,.strategies-live-panel td{
+  white-space:nowrap!important;
+  overflow:visible!important;
+  min-width:max-content!important;
+  font-size:calc(14px * var(--fit-scale-small))!important;
+  line-height:1.2!important;
+}
+.pre,.events-panel td,.ws-detail-table td,.toast{
+  white-space:pre-wrap!important;
+  overflow-wrap:anywhere!important;
+  font-size:calc(13px * var(--fit-scale-small))!important;
+}
+button,.pill,.tab{
+  white-space:normal!important;
+  min-width:0!important;
+  font-size:calc(14px * var(--fit-scale))!important;
+  line-height:1.1!important;
+}
+@media(max-width:1350px){
+  :root{--fit-scale:clamp(.48, calc(100vw / 1500), .86);--fit-scale-small:clamp(.46, calc(100vw / 1350), .82)}
+  .footer{gap:4px!important}
+}
+@media(max-width:900px){
+  :root{--fit-scale:.46;--fit-scale-small:.44}
+}
+
+
+
+/* v27.30 fixed-card wrap policy
+   화면 폭 부족 시: 카드별 고정 기준폭 유지 → 줄 바꿈으로 다음 줄 이동.
+   말줄임표 금지. 표는 가로/세로 스크롤 생성. */
+:root{
+  --fit-scale:clamp(.62, calc(100vw / 1920), 1);
+  --fit-scale-small:clamp(.56, calc(100vw / 1680), 1);
+}
+.cards,
+.auto-hero-grid{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:clamp(8px,.75vw,14px)!important;
+  align-items:stretch!important;
+  justify-content:flex-start!important;
+  grid-template-columns:none!important;
+}
+.card,
+.auto-hero-card,
+.auto-metric,
+.exchange-status .box,
+.box{
+  flex:0 0 var(--card-w,240px)!important;
+  width:var(--card-w,240px)!important;
+  min-width:var(--card-w,240px)!important;
+  max-width:var(--card-w,240px)!important;
+  overflow:visible!important;
+}
+.card-wide{--card-w:340px!important}
+.card-medium{--card-w:260px!important}
+.card-normal{--card-w:240px!important}
+.card-narrow{--card-w:210px!important}
+.auto-hero-card.card-wide{--card-w:300px!important}
+.auto-hero-card.card-medium{--card-w:245px!important}
+.auto-hero-card.card-normal{--card-w:230px!important}
+.auto-hero-card.card-narrow{--card-w:218px!important}
+.card .title,.card .big,.card .sub,
+.auto-hero-card b,.auto-hero-card p,.auto-hero-card small,
+.auto-metric b,.auto-metric p,.auto-metric small,
+.exchange-status .box b,.exchange-status .box p,.exchange-status .box small{
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  word-break:keep-all!important;
+  overflow-wrap:normal!important;
+}
+.card .big,.auto-hero-card p{font-size:calc(22px * var(--fit-scale))!important;line-height:1.06!important}
+.card .title,.auto-hero-card b,.auto-metric b,.exchange-status .box b{font-size:calc(15px * var(--fit-scale))!important;line-height:1.08!important}
+.card .sub,.auto-hero-card small,.auto-metric small,.exchange-status .box small{font-size:calc(13px * var(--fit-scale))!important;line-height:1.08!important}
+.card-head{white-space:nowrap!important;flex-wrap:nowrap!important}
+.panel{overflow:auto!important;min-width:0!important}
+.panel table, table{
+  width:max-content!important;
+  min-width:100%!important;
+  table-layout:auto!important;
+}
+th,td,
+.auto-dashboard th,.auto-dashboard td,
+.positions-panel th,.positions-panel td,
+.strategies-live-panel th,.strategies-live-panel td{
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  min-width:max-content!important;
+}
+.footer{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  justify-content:space-between!important;
+  align-items:center!important;
+  gap:clamp(10px,1.1vw,22px)!important;
+  height:auto!important;
+  min-height:44px!important;
+  padding:8px 12px!important;
+}
+.footer span{
+  flex:0 0 auto!important;
+  width:auto!important;
+  min-width:max-content!important;
+  max-width:none!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  font-size:calc(14px * var(--fit-scale-small))!important;
+}
+button,.pill,.tab{
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  font-size:calc(14px * var(--fit-scale))!important;
+  line-height:1.1!important;
+}
+@media(max-width:1500px){
+  :root{--fit-scale:clamp(.54, calc(100vw / 1700), .9);--fit-scale-small:clamp(.50, calc(100vw / 1500), .84)}
+  .card-wide{--card-w:315px!important}.card-medium{--card-w:240px!important}.card-normal{--card-w:225px!important}.card-narrow{--card-w:198px!important}
+  .auto-hero-card.card-wide{--card-w:280px!important}.auto-hero-card.card-medium{--card-w:230px!important}.auto-hero-card.card-normal{--card-w:215px!important}.auto-hero-card.card-narrow{--card-w:205px!important}
+}
+@media(max-width:900px){
+  :root{--fit-scale:.50;--fit-scale-small:.48}
+  .card-wide,.card-medium,.card-normal,.card-narrow,
+  .auto-hero-card.card-wide,.auto-hero-card.card-medium,.auto-hero-card.card-normal,.auto-hero-card.card-narrow{--card-w:calc(50vw - 22px)!important}
+}
+@media(max-width:560px){
+  .card-wide,.card-medium,.card-normal,.card-narrow,
+  .auto-hero-card.card-wide,.auto-hero-card.card-medium,.auto-hero-card.card-normal,.auto-hero-card.card-narrow{--card-w:calc(100vw - 24px)!important}
+}
+
+
+/* v27.31 no-wrap card fit policy
+   화면 폭 부족 시: 한 줄 유지 → 개별 카드 폭 비율 조정 → 텍스트를 최대 1/2까지 비례 축소.
+   카드 줄바꿈 금지. 표는 가로/세로 스크롤 유지. */
+:root{--card-fit-scale:1;--card-fit-min:.50;}
+.cards,
+.auto-hero-grid{
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  width:100%!important;
+  max-width:100%!important;
+  gap:clamp(6px,.65vw,14px)!important;
+  align-items:stretch!important;
+  justify-content:space-between!important;
+  overflow:visible!important;
+  grid-template-columns:none!important;
+}
+.card,
+.auto-hero-card,
+.auto-metric,
+.exchange-status .box,
+.box{
+  flex:1 1 0!important;
+  width:auto!important;
+  min-width:0!important;
+  max-width:none!important;
+  overflow:visible!important;
+}
+.card-wide,.auto-hero-card.card-wide{flex-grow:1.55!important;}
+.card-medium,.auto-hero-card.card-medium{flex-grow:1.16!important;}
+.card-normal,.auto-hero-card.card-normal{flex-grow:1!important;}
+.card-narrow,.auto-hero-card.card-narrow{flex-grow:.82!important;}
+.card .title,.card .big,.card .sub,
+.auto-hero-card b,.auto-hero-card p,.auto-hero-card small,
+.auto-metric b,.auto-metric p,.auto-metric small,
+.exchange-status .box b,.exchange-status .box p,.exchange-status .box small{
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  word-break:keep-all!important;
+  overflow-wrap:normal!important;
+  transform-origin:center center!important;
+}
+.card .big,.auto-hero-card p{font-size:calc(22px * var(--fit-scale) * var(--card-fit-scale))!important;line-height:1.04!important;}
+.card .title,.auto-hero-card b,.auto-metric b,.exchange-status .box b{font-size:calc(15px * var(--fit-scale) * var(--card-fit-scale))!important;line-height:1.06!important;}
+.card .sub,.auto-hero-card small,.auto-metric small,.exchange-status .box small{font-size:calc(13px * var(--fit-scale) * var(--card-fit-scale))!important;line-height:1.06!important;}
+.card-head{white-space:nowrap!important;flex-wrap:nowrap!important;}
+.auto-hero-card{grid-template-columns:clamp(20px,2vw,36px) minmax(0,1fr)!important;}
+.auto-hero-card .hero-ico{font-size:calc(28px * var(--fit-scale) * var(--card-fit-scale))!important;}
+@media(max-width:900px){
+  :root{--fit-scale:.50;--fit-scale-small:.48;}
+  .cards,.auto-hero-grid{gap:4px!important;}
+}
+@media(max-width:560px){
+  :root{--fit-scale:.44;--fit-scale-small:.42;}
+  .cards,.auto-hero-grid{gap:3px!important;}
+}
+
+
+
+/* v27.32 card icon-title center + table scroll boundary fix */
+:root{--app-version-label:"v27.32-card-icon-title-table-scroll";}
+.card,.auto-hero-card,.auto-metric,.exchange-status .box,.box{
+  text-align:center!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.card-head,.auto-hero-head{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:clamp(4px,.45vw,8px)!important;
+  width:100%!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+  flex-wrap:nowrap!important;
+}
+.card .ico,.auto-hero-card .hero-ico{
+  position:static!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex:0 0 auto!important;
+  margin:0!important;
+  transform:none!important;
+}
+.card .title,.auto-hero-card b{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  margin:0!important;
+}
+.auto-hero-card{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  gap:3px!important;
+  grid-template-columns:none!important;
+}
+.auto-hero-card p,.auto-hero-card small,.card .big,.card .sub{
+  text-align:center!important;
+  width:100%!important;
+}
+.panel,.positions-panel,.strategies-panel,.events-panel,.strategies-live-panel,.auto-dashboard .panel,.settings-grid .panel{
+  overflow:auto!important;
+  min-width:0!important;
+  max-width:100%!important;
+}
+table{
+  table-layout:auto!important;
+  width:max-content!important;
+  min-width:100%!important;
+  max-width:none!important;
+}
+th,td{
+  white-space:nowrap!important;
+  overflow:visible!important;
+  word-break:keep-all!important;
+  overflow-wrap:normal!important;
+}
+.pre,.events-panel,.log-panel{
+  overflow:auto!important;
+}
+.equity-chart,.position-price-panel{
+  overflow:hidden!important;
+}
+
+
+/* v27.33 unified card/table rule
+   - 아이콘은 제목 앞, 아이콘+제목 한 묶음 가운데 정렬
+   - 카드 안 전체 가운데 정렬
+   - 말줄임표 미사용
+   - 창 축소 시 글자 축소 없음, 카드 단위 다음 줄 이동
+   - 표는 카드 범위 안에서 가로/세로 스크롤 */
+:root{--app-version-label:"v27.44-mock-account-order-strategy-compare";}
+*{text-overflow:clip!important;word-break:keep-all!important;}
+body{overflow-x:hidden!important;}
+.cards,.auto-hero-grid,.auto-metric-grid,.exchange-status,.settings-grid,.exclude-grid{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  align-items:stretch!important;
+  justify-content:flex-start!important;
+  gap:12px!important;
+  grid-template-columns:none!important;
+}
+.card,.auto-hero-card,.auto-metric,.exchange-status .box,.box,.exclude-card{
+  flex:0 0 var(--card-w,240px)!important;
+  width:var(--card-w,240px)!important;
+  min-width:var(--card-w,240px)!important;
+  max-width:var(--card-w,240px)!important;
+  min-height:96px!important;
+  height:auto!important;
+  overflow:visible!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  padding:10px!important;
+}
+.card-wide{--card-w:390px!important}.card-medium{--card-w:300px!important}.card-normal{--card-w:265px!important}.card-narrow{--card-w:230px!important}
+.auto-hero-card.card-wide{--card-w:310px!important}.auto-hero-card.card-medium{--card-w:260px!important}.auto-hero-card.card-normal{--card-w:245px!important}.auto-hero-card.card-narrow{--card-w:225px!important}
+.card-head,.auto-hero-head{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  width:100%!important;
+  text-align:center!important;
+  white-space:normal!important;
+  flex-wrap:wrap!important;
+}
+.card .ico,.auto-hero-card .hero-ico{
+  position:static!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  margin:0!important;
+  font-size:24px!important;
+  line-height:1!important;
+}
+.card .title,.auto-hero-card b{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  margin:0!important;
+  font-size:18px!important;
+  line-height:1.18!important;
+  white-space:normal!important;
+}
+.card .big,.auto-hero-card p{font-size:22px!important;line-height:1.14!important;margin:6px 0 2px!important;text-align:center!important;width:100%!important;white-space:normal!important;}
+.card .sub,.auto-hero-card small{font-size:15px!important;line-height:1.18!important;text-align:center!important;width:100%!important;white-space:normal!important;}
+button,.pill,.tab{font-size:14px!important;white-space:normal!important;text-overflow:clip!important;overflow:visible!important;}
+.panel,.positions-panel,.strategies-panel,.events-panel,.strategies-live-panel,.auto-dashboard .panel,.settings-stack .panel{
+  overflow:auto!important;
+  min-width:0!important;
+  max-width:100%!important;
+}
+.panel table,table{
+  width:max-content!important;
+  min-width:100%!important;
+  max-width:none!important;
+  table-layout:auto!important;
+}
+th,td,.auto-dashboard th,.auto-dashboard td,.positions-panel th,.positions-panel td,.strategies-live-panel th,.strategies-live-panel td{
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  min-width:max-content!important;
+  font-size:14px!important;
+  line-height:1.22!important;
+}
+.auto-main-grid{grid-template-columns:minmax(0,2fr) minmax(360px,.95fr)!important;align-items:start!important;}
+.auto-left-stack{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;min-width:0!important;}
+.buy-formula-panel{order:0!important;}
+.strategies-live-panel{order:1!important;}
+.auto-bottom-grid{grid-template-columns:minmax(0,1.25fr) minmax(360px,.9fr)!important;}
+.footer{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  align-items:center!important;
+  justify-content:space-evenly!important;
+  gap:14px!important;
+  height:auto!important;
+  min-height:44px!important;
+  overflow:visible!important;
+  padding:8px 12px!important;
+}
+.footer span{font-size:14px!important;white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;min-width:max-content!important;width:auto!important;}
+@media(max-width:1500px){
+  .card-wide{--card-w:360px!important}.card-medium{--card-w:280px!important}.card-normal{--card-w:245px!important}.card-narrow{--card-w:215px!important}
+  .auto-main-grid,.auto-mid-grid,.auto-bottom-grid{grid-template-columns:1fr!important;}
+}
+@media(max-width:900px){
+  .card-wide,.card-medium,.card-normal,.card-narrow,.auto-hero-card.card-wide,.auto-hero-card.card-medium,.auto-hero-card.card-normal,.auto-hero-card.card-narrow{--card-w:calc(50vw - 24px)!important;}
+}
+@media(max-width:560px){
+  .card-wide,.card-medium,.card-normal,.card-narrow,.auto-hero-card.card-wide,.auto-hero-card.card-medium,.auto-hero-card.card-normal,.auto-hero-card.card-narrow{--card-w:calc(100vw - 24px)!important;}
+}
+
+
+
+/* v27.34 max-window one-row fixed card policy
+   - 최대창에서는 카드 묶음을 1줄로 유지
+   - 창을 줄이면 카드 폭/글자 크기를 바꾸지 않고, 범위를 벗어난 개별 카드만 다음 줄로 이동
+   - 카드 내부는 아이콘+제목 중앙, 전체 중앙 정렬
+   - 표는 카드/패널 범위 안에서 스크롤 */
+:root{--app-version-label:"v27.44-mock-account-order-strategy-compare";}
+.cards,
+.auto-hero-grid,
+.auto-metric-grid,
+.exchange-status,
+.settings-grid,
+.exclude-grid{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  align-items:stretch!important;
+  justify-content:flex-start!important;
+  gap:12px!important;
+  grid-template-columns:none!important;
+  overflow:visible!important;
+}
+.card,
+.auto-hero-card,
+.auto-metric,
+.exchange-status .box,
+.box,
+.exclude-card{
+  flex:0 0 var(--card-w,220px)!important;
+  width:var(--card-w,220px)!important;
+  min-width:var(--card-w,220px)!important;
+  max-width:var(--card-w,220px)!important;
+  min-height:104px!important;
+  height:auto!important;
+  overflow:visible!important;
+  text-align:center!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:10px!important;
+}
+.card-wide{--card-w:360px!important;}
+.card-medium{--card-w:280px!important;}
+.card-normal{--card-w:235px!important;}
+.card-narrow{--card-w:205px!important;}
+.auto-hero-card.card-wide{--card-w:250px!important;}
+.auto-hero-card.card-medium{--card-w:220px!important;}
+.auto-hero-card.card-normal{--card-w:220px!important;}
+.auto-hero-card.card-narrow{--card-w:205px!important;}
+.card-head,.auto-hero-head{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  width:100%!important;
+  text-align:center!important;
+  white-space:normal!important;
+  flex-wrap:wrap!important;
+}
+.card .ico,.auto-hero-card .hero-ico{position:static!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;margin:0!important;line-height:1!important;}
+.card .title,.auto-hero-card b{display:inline-flex!important;align-items:center!important;justify-content:center!important;margin:0!important;text-align:center!important;}
+.card .big,.auto-hero-card p,.card .sub,.auto-hero-card small{width:100%!important;text-align:center!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;}
+.panel,.positions-panel,.strategies-panel,.events-panel,.strategies-live-panel,.auto-dashboard .panel,.settings-stack .panel{overflow:auto!important;min-width:0!important;max-width:100%!important;}
+.panel table,table{width:max-content!important;min-width:100%!important;max-width:none!important;table-layout:auto!important;}
+th,td,.auto-dashboard th,.auto-dashboard td,.positions-panel th,.positions-panel td,.strategies-live-panel th,.strategies-live-panel td{white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;}
+@media(max-width:1500px){
+  .card-wide,.card-medium,.card-normal,.card-narrow{width:var(--card-w)!important;min-width:var(--card-w)!important;max-width:var(--card-w)!important;}
+  .auto-hero-card.card-wide,.auto-hero-card.card-medium,.auto-hero-card.card-normal,.auto-hero-card.card-narrow{width:var(--card-w)!important;min-width:var(--card-w)!important;max-width:var(--card-w)!important;}
+  .auto-main-grid,.auto-mid-grid,.auto-bottom-grid{grid-template-columns:1fr!important;}
+}
+@media(max-width:900px){
+  .card-wide,.card-medium,.card-normal,.card-narrow,.auto-hero-card.card-wide,.auto-hero-card.card-medium,.auto-hero-card.card-normal,.auto-hero-card.card-narrow{width:var(--card-w)!important;min-width:var(--card-w)!important;max-width:var(--card-w)!important;}
+}
+
+
+/* v27.35 max-window forced one-row compact widths + order card move
+   최대창(1600px 이상): 운영/자동매매 상단 카드는 무조건 1줄 유지.
+   창 축소 시: 카드 크기는 유지하고 범위를 벗어난 개별 카드만 다음 줄 이동. */
+:root{--app-version-label:"v27.44-mock-account-order-strategy-compare";}
+@media (min-width:1600px){
+  .cards,
+  .auto-hero-grid{
+    flex-wrap:nowrap!important;
+    width:100%!important;
+    max-width:100%!important;
+    gap:12px!important;
+  }
+  .cards .card-wide{--card-w:320px!important;}
+  .cards .card-medium{--card-w:238px!important;}
+  .cards .card-normal{--card-w:210px!important;}
+  .cards .card-narrow{--card-w:180px!important;}
+  .auto-hero-card.card-wide{--card-w:230px!important;}
+  .auto-hero-card.card-medium{--card-w:210px!important;}
+  .auto-hero-card.card-normal{--card-w:208px!important;}
+  .auto-hero-card.card-narrow{--card-w:198px!important;}
+  .cards .card,
+  .auto-hero-grid .auto-hero-card{
+    flex:0 0 var(--card-w)!important;
+    width:var(--card-w)!important;
+    min-width:var(--card-w)!important;
+    max-width:var(--card-w)!important;
+  }
+}
+@media (max-width:1599px){
+  .cards,
+  .auto-hero-grid{
+    flex-wrap:wrap!important;
+  }
+}
+.auto-left-stack .auto-trades-panel{order:0!important;}
+.auto-left-stack .buy-formula-panel{order:1!important;}
+.auto-left-stack .strategies-live-panel{order:2!important;}
+
+
+/* v27.39 position total/sort + sticky table header + auto-card reorder */
+:root{--app-version-label:"v27.44-mock-account-order-strategy-compare";}
+.panel-title-row{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#10283b,#0a1b2a);padding-bottom:6px!important;}
+.sort-btn{padding:6px 10px!important;border-radius:7px!important;background:#0b6fa8!important;color:#fff!important;font-size:13px!important;white-space:nowrap!important;}
+.summary-row td{background:#17364d!important;color:#fff!important;font-weight:1000!important;box-shadow:inset 0 1px 0 #3b6580,inset 0 -1px 0 #3b6580;}
+.summary-row td.blue{color:var(--blue)!important}.summary-row td.red{color:var(--red)!important}
+.panel:has(table){overflow:auto!important;}
+th{position:sticky!important;top:0!important;z-index:4!important;background:#17364d!important;box-shadow:0 1px 0 #335b77,0 -1px 0 #335b77!important;}
+.positions-panel th{top:44px!important;z-index:4!important;}
+.buy-formula-panel{align-self:start!important;min-height:0!important;}
+.buy-formula-panel table th,.buy-formula-panel table td{padding:6px 8px!important;}
+.buy-formula-panel .small{margin:6px 0 0!important;}
+.auto-right-stack{grid-template-rows:auto auto auto!important;}
+.auto-mid-grid{grid-template-columns:.78fr 1.08fr .82fr!important;}
+
+.strategy-selector{display:grid;grid-template-columns:1fr 1fr;gap:10px}.strategy-option{border:1px solid var(--line);border-radius:8px;padding:12px;background:#0c2234}.strategy-option.active{box-shadow:0 0 0 2px var(--cyan) inset}.strategy-option b{display:block;font-size:17px;margin-bottom:5px}.strategy-option small{color:#cfe9ff}.strategy-radio{font-size:22px;margin-right:6px;color:var(--cyan)}
+</style></head><body><div class="app">
+<header class="top"><nav class="mainnav"><div class="tab active" data-tab="ops"><span class="navico">📊</span>운영 현황</div><div class="tab" data-tab="auto"><span class="navico">⚡</span>자동 매매</div><div class="tab" data-tab="manual"><span class="navico">✍️</span>수동 매매</div><div class="tab" data-tab="report"><span class="navico">📋</span>리포트</div><div class="tab" data-tab="settings"><span class="navico">⚙️</span>설정</div></nav><div class="top-actions"><div class="appkey"><span>🗂️</span><div><div class="label">앱키 만료일</div><div class="date" id="expire">-</div></div></div><button class="pill" id="wsToggle" onclick="toggleRealtime()">웹소켓 ON <span class="dot"></span></button><button class="pill" id="profileBtn" onclick="toggleProfile()">모의 <span class="dot"></span></button></div></header>
+<main class="wrap">
+<section id="ops" class="page"><div class="cards" id="cards"></div><div class="ops-body-grid"><div class="ops-left-stack"><div class="panel positions-panel"><h2 class="panel-title-row"><span>보유 종목 현황 (<span id="poscount">0/20</span>)</span><button id="posSortBtn" class="sort-btn" onclick="togglePositionSort()">순손익 ▼</button></h2><table id="positions"></table></div></div><div class="ops-right-stack"><div class="panel events-panel"><h2>최근 이벤트</h2><table id="events"></table></div><div class="position-chart-slot"><div class="panel position-price-panel"><h2 id="positionChartTitle">시간대별 현재가 선그래프</h2><div class="small muted">보유 종목 현황의 종목명(종목코드)을 클릭하면 이 위치에 해당 종목의 현재가 흐름이 생성됩니다.</div><div id="positionPriceChart" class="equity-chart position-price-chart"></div></div></div></div></div></section>
+<section id="auto" class="page hidden">
+  <div class="auto-dashboard">
+    <div class="auto-summary-title"></div>
+    <div class="auto-hero-grid" id="autoCards"></div>
+
+    <div class="auto-main-grid">
+      <div class="auto-left-stack">
+        <div class="panel auto-trades-panel"><h2>최근 주문/체결 (실시간)</h2><table id="autoTrades"></table></div>
+        <div class="panel buy-formula-panel"><h2>매수 금액 계산 공식 (자동 반영)</h2><table id="buyFormulaTable"></table><p class="small muted">※ 종목별 계산 예시는 전략 실행 시 실시간 가격·손절가·리스크 허용 비율로 자동 갱신됩니다.</p></div>
+        <div class="panel"><h2>전략 선택</h2><div id="strategySelector" class="strategy-selector"></div></div>
+        <div class="panel"><h2>내 전략 / 4대 퀀트 전략 비교표</h2><table id="strategyComparePolicy"></table></div>
+        <div class="panel"><h2>운용 상태 · 리밸런싱 · 결과 리포트 통합표</h2><table id="operationStatusPolicy"></table></div>
+        <div class="panel strategies-live-panel"><h2>전략별 실행 상태 (실시간)</h2><table id="strategies2"></table></div>
+        <div class="panel"><h2>통합 운용 정책 적용 현황</h2><table id="autoOperationPolicy"></table></div>
+        <div class="panel"><h2>매수·매도 기준 적용표</h2><table id="buySellPolicy"></table></div>
+      </div>
+      <div class="auto-right-stack">
+          <div class="panel risk-link-panel"><h2>리스크 경고 연계</h2><table id="riskLinkTable"></table></div>
+        <div class="panel backtest-panel"><h2>전략 검증 요약 (백테스트)</h2><table id="backtestSummary"></table></div>
+        <div class="panel sector-card auto-sector-right"><h2>업종 등락률 TOP5 <span class="sector-tabs"><span id="autoSectorUpBtn" class="active" onclick="setSectorMode('up')">상승 TOP5</span><span id="autoSectorDownBtn" onclick="setSectorMode('down')">하락 TOP5</span></span></h2><div id="autoSectors"></div></div>
+      </div>
+    </div>
+
+    <div class="auto-mid-grid">
+      <div class="panel ws-detail-panel"><h2>WebSocket 수신 상세</h2><table id="wsDetail" class="ws-detail-table"></table></div>
+      <div class="panel indices-panel"><h2>시장 지수</h2><div id="autoIndices" class="indices-list"></div></div>
+    </div>
+
+    <div class="auto-bottom-grid">
+      <div class="panel"><h2>투자 유형별 자금 배분/매수금지 기준</h2><table id="autoInvestmentTable"></table></div>
+      <div class="panel"><h2>계좌 주문 실행 상태</h2><table id="orderExecutionStatus"></table></div>
+      <div class="panel"><h2>운영 일정 및 시장 시간</h2><table id="autoScheduleMini"></table><div class="auto-ring"><div>100%</div></div></div>
+    </div>
+
+    <div class="auto-legacy-stack">
+      <div class="panel exchange-card"><h2>KRX / NXT 통합 운영 시간 · 자동매매 엔진 상태</h2><table id="exchangeSchedule" class="exchange-table"></table></div>
+      <div class="panel"><h2>실시간 원문 / 자동매매 이벤트</h2><pre id="raw" class="pre"></pre></div>
+    </div>
+  </div>
+</section>
+<section id="manual" class="page hidden"><div class="panel"><h2>수동 매매</h2><div class="formgrid"><input class="input" id="mcode" placeholder="종목코드"><input class="input" id="mname" placeholder="종목명"><select class="input" id="mside"><option value="BUY">매수</option><option value="SELL">매도</option></select><input class="input" id="mqty" type="number" value="1"><input class="input" id="mprice" type="number" placeholder="가격"><button onclick="manualOrder()">주문 의도 등록</button></div><p class="small muted">실제 주문 전 안전 모드입니다. 주문/체결 확인은 실시간 API 스트림과 연결됩니다.</p></div></section>
+<section id="report" class="page hidden"><div class="panel"><h2>장 종료 자동 리포트</h2><table id="reportCards" class="report-table"></table></div><div class="panel report-log"><h2>운영 알림 로그</h2><table id="lifecycle"></table></div></section>
+
+<section id="settings" class="page hidden"><div class="settings-stack"><div class="panel"><h2>제외종목</h2><div id="excludeCards" class="exclude-grid"></div></div><div class="panel"><h2>6가지 투자 유형 · 자금배분/매수금지 기준</h2><table id="investmentCards" class="settings-invest-table"></table></div><div class="panel"><h2>키움 REST/실시간 API 1:1 매핑 정책</h2><table id="apiPolicy" class="api-policy-table"></table></div><div class="panel"><h2>주문금액 및 리스크</h2><div class="settings-grid" id="setgrid"></div></div></div></section>
+</main><footer class="footer"><span id="footerDbVer">DB버전: -</span><span id="dbState">DB: -</span><span id="ver">버전: -</span><span id="footerMode">모드: -</span><span id="footerAuto">자동운영: 병용</span><span id="footerServer">서버: -</span><span id="footerWs">WebSocket: -</span><span id="lastBackup">마지막 백업: -</span></footer><div class="toast" id="toast"></div></div><script src="/static/app.js"></script>
+<!-- v27.36 content-based card font/height fit + fixed equal-width wrap -->
+<style>
+.cards,.auto-hero-grid{
+  display:grid!important;
+  grid-auto-flow:row!important;
+  grid-auto-columns:var(--layout-card-width)!important;
+  justify-content:start!important;
+  align-items:stretch!important;
+  gap:12px!important;
+  grid-template-columns:repeat(auto-fill, var(--layout-card-width, 220px))!important;
+}
+.card,.auto-hero-card{
+  box-sizing:border-box!important;
+  flex:0 0 var(--layout-card-width,220px)!important;
+  width:var(--layout-card-width,220px)!important;
+  min-width:var(--layout-card-width,220px)!important;
+  max-width:var(--layout-card-width,220px)!important;
+  height:auto!important;
+  min-height:var(--card-min-height,106px)!important;
+  overflow:hidden!important;
+  text-align:center!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.card .card-head,.auto-hero-card .auto-hero-head{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  width:100%!important;
+  white-space:nowrap!important;
+}
+.card .title,.card .big,.card .sub,
+.auto-hero-card b,.auto-hero-card p,.auto-hero-card small{
+  white-space:nowrap!important;
+  overflow:visible!important;
+  word-break:keep-all!important;
+  overflow-wrap:normal!important;
+  text-align:center!important;
+  max-width:none!important;
+}
+.card .big,.auto-hero-card p{font-size:calc(22px * var(--card-local-scale,1))!important;line-height:1.14!important}
+.card .title,.auto-hero-card b{font-size:calc(15px * var(--card-local-scale,1))!important;line-height:1.16!important}
+.card .sub,.auto-hero-card small{font-size:calc(13px * var(--card-local-scale,1))!important;line-height:1.16!important}
+.panel{overflow:auto!important}
+.table-wrap,.panel table{max-width:100%!important}
+table{width:max-content!important;min-width:100%!important;table-layout:auto!important}
+th,td{white-space:nowrap!important;overflow:visible!important;word-break:keep-all!important;overflow-wrap:normal!important}
+
+/* v27.39 position total/sort + sticky table header + auto-card reorder */
+:root{--app-version-label:"v27.44-mock-account-order-strategy-compare";}
+.panel-title-row{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#10283b,#0a1b2a);padding-bottom:6px!important;}
+.sort-btn{padding:6px 10px!important;border-radius:7px!important;background:#0b6fa8!important;color:#fff!important;font-size:13px!important;white-space:nowrap!important;}
+.summary-row td{background:#17364d!important;color:#fff!important;font-weight:1000!important;box-shadow:inset 0 1px 0 #3b6580,inset 0 -1px 0 #3b6580;}
+.summary-row td.blue{color:var(--blue)!important}.summary-row td.red{color:var(--red)!important}
+.panel:has(table){overflow:auto!important;}
+th{position:sticky!important;top:0!important;z-index:4!important;background:#17364d!important;box-shadow:0 1px 0 #335b77,0 -1px 0 #335b77!important;}
+.positions-panel th{top:44px!important;z-index:4!important;}
+.buy-formula-panel{align-self:start!important;min-height:0!important;}
+.buy-formula-panel table th,.buy-formula-panel table td{padding:6px 8px!important;}
+.buy-formula-panel .small{margin:6px 0 0!important;}
+.auto-right-stack{grid-template-rows:auto auto auto!important;}
+.auto-mid-grid{grid-template-columns:.78fr 1.08fr .82fr!important;}
+
+</style>
+
+
+<!-- v27.37 equal max-width card grid + recent-event table scroll fix -->
+<style>
+.cards,.auto-hero-grid{
+  display:grid!important;
+  grid-auto-flow:row!important;
+  justify-content:start!important;
+  align-items:stretch!important;
+  gap:12px!important;
+  width:100%!important;
+  max-width:100%!important;
+}
+.card,.auto-hero-card{
+  width:var(--layout-card-width,220px)!important;
+  min-width:var(--layout-card-width,220px)!important;
+  max-width:var(--layout-card-width,220px)!important;
+  overflow:hidden!important;
+}
+.events-panel{overflow:auto!important;max-width:100%!important;}
+.events-panel table{
+  width:max-content!important;
+  min-width:100%!important;
+  table-layout:auto!important;
+}
+#events th,#events td{
+  white-space:nowrap!important;
+  word-break:keep-all!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+#events th:nth-child(1),#events td:nth-child(1){min-width:118px!important;width:118px!important;}
+#events th:nth-child(2),#events td:nth-child(2){min-width:96px!important;width:96px!important;}
+#events th:nth-child(3),#events td:nth-child(3){min-width:560px!important;text-align:left!important;}
+.badge{display:inline-flex!important;align-items:center!important;justify-content:center!important;white-space:nowrap!important;word-break:keep-all!important;min-width:44px!important;}
+.panel{overflow:auto!important;}
+.panel table{width:max-content!important;min-width:100%!important;max-width:none!important;}
+
+/* v27.39 position total/sort + sticky table header + auto-card reorder */
+:root{--app-version-label:"v27.44-mock-account-order-strategy-compare";}
+.panel-title-row{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#10283b,#0a1b2a);padding-bottom:6px!important;}
+.sort-btn{padding:6px 10px!important;border-radius:7px!important;background:#0b6fa8!important;color:#fff!important;font-size:13px!important;white-space:nowrap!important;}
+.summary-row td{background:#17364d!important;color:#fff!important;font-weight:1000!important;box-shadow:inset 0 1px 0 #3b6580,inset 0 -1px 0 #3b6580;}
+.summary-row td.blue{color:var(--blue)!important}.summary-row td.red{color:var(--red)!important}
+.panel:has(table){overflow:auto!important;}
+th{position:sticky!important;top:0!important;z-index:4!important;background:#17364d!important;box-shadow:0 1px 0 #335b77,0 -1px 0 #335b77!important;}
+.positions-panel th{top:44px!important;z-index:4!important;}
+.buy-formula-panel{align-self:start!important;min-height:0!important;}
+.buy-formula-panel table th,.buy-formula-panel table td{padding:6px 8px!important;}
+.buy-formula-panel .small{margin:6px 0 0!important;}
+.auto-right-stack{grid-template-rows:auto auto auto!important;}
+.auto-mid-grid{grid-template-columns:.78fr 1.08fr .82fr!important;}
+
+</style>
+
+
+
+<!-- v27.40 sticky panel title mask + compact formula alignment -->
+<style>
+:root{--app-version-label:"v27.44-mock-account-order-strategy-compare";}
+/* 모든 스크롤 패널: 카드 제목은 고정, 스크롤된 표 내용은 제목 뒤로 가려지도록 마스크 */
+.panel,.positions-panel,.events-panel,.strategies-panel,.strategies-live-panel,.auto-dashboard .panel{
+  position:relative!important;
+  overflow:auto!important;
+  background:linear-gradient(180deg,#10283b,#0a1b2a)!important;
+  isolation:isolate!important;
+}
+.panel h2{
+  position:sticky!important;
+  top:0!important;
+  z-index:30!important;
+  display:block!important;
+  margin:-10px -10px 8px -10px!important;
+  padding:10px 10px 8px 10px!important;
+  min-height:44px!important;
+  background:linear-gradient(180deg,#10283b 0%,#10283b 58%,#0a1b2a 100%)!important;
+  box-shadow:0 1px 0 #335b77,0 8px 12px #071522cc!important;
+}
+.panel h2.panel-title-row{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:10px!important;
+}
+.panel h2::before{
+  content:"";
+  position:absolute;
+  left:0;right:0;top:-16px;height:16px;
+  background:#10283b;
+  z-index:-1;
+}
+.panel table th,
+.panel:has(table) table th{
+  position:sticky!important;
+  top:44px!important;
+  z-index:25!important;
+  background:#17364d!important;
+  box-shadow:0 1px 0 #335b77,0 -1px 0 #335b77!important;
+}
+.positions-panel th,.events-panel th,.auto-dashboard .panel th{top:44px!important;}
+/* 제목/헤더 뒤로 지나간 행이 위쪽 빈틈에 보이지 않도록 표 시작 위치와 패널 마스크 보강 */
+.panel table{
+  position:relative!important;
+  z-index:1!important;
+}
+.summary-row td{z-index:1!important;}
+/* 최근 이벤트: 시간/구분/메시지는 내부 가로 스크롤을 유지하면서 제목 고정 */
+.events-panel{height:430px!important;max-height:430px!important;}
+.events-panel table{width:max-content!important;min-width:100%!important;table-layout:auto!important;}
+#events th:nth-child(1),#events td:nth-child(1){min-width:118px!important;width:118px!important;}
+#events th:nth-child(2),#events td:nth-child(2){min-width:96px!important;width:96px!important;}
+#events th:nth-child(3),#events td:nth-child(3){min-width:560px!important;text-align:left!important;}
+/* 매수 금액 계산 공식 카드: 리스크 경고 연계 카드 하단선과 맞도록 높이/여백 압축 */
+.buy-formula-panel{
+  height:168px!important;
+  min-height:168px!important;
+  max-height:168px!important;
+  overflow:auto!important;
+  align-self:start!important;
+}
+.buy-formula-panel h2{min-height:38px!important;padding-top:8px!important;padding-bottom:6px!important;margin-bottom:6px!important;}
+.buy-formula-panel table th,.buy-formula-panel table td{padding:5px 7px!important;font-size:13px!important;line-height:1.15!important;}
+.buy-formula-panel .small{margin:5px 0 0!important;font-size:12px!important;line-height:1.2!important;}
+/* 리스크/검증 우측 스택은 자동 높이로 과도한 여백 방지 */
+.auto-right-stack{grid-template-rows:auto auto!important;align-content:start!important;}
+.auto-right-stack .panel{min-height:0!important;}
+
+
+/* v27.41 summary/chart/risk/sector alignment fixes */
+.summary-row td{background:#1e3b4f!important;color:#f5fbff!important;}
+.summary-row td.blue{color:var(--blue)!important}.summary-row td.red{color:var(--red)!important}
+.events-panel .more{display:none!important;}
+/* 운영현황: 보유종목 카드 하단선과 시간대별 현재가 카드 하단선 일치 */
+@media (min-width:1351px){
+  .ops-body-grid{align-items:start!important;}
+  .ops-right-stack{height:651px!important;max-height:651px!important;display:flex!important;flex-direction:column!important;gap:10px!important;min-height:0!important;}
+  .ops-right-stack .events-panel{height:430px!important;max-height:430px!important;flex:0 0 430px!important;}
+  .position-chart-slot{flex:1 1 auto!important;min-height:0!important;margin-top:0!important;display:block!important;}
+  .position-price-panel{height:100%!important;min-height:0!important;max-height:none!important;overflow:hidden!important;}
+  .position-price-chart{height:calc(100% - 76px)!important;min-height:115px!important;}
+}
+/* 자동매매: 최근주문+매수금액 카드 묶음의 하단을 리스크 카드 하단과 일치 */
+@media (min-width:1351px){
+  .auto-main-grid{align-items:start!important;}
+  .auto-left-stack{display:grid!important;grid-template-rows:180px 190px auto!important;gap:10px!important;align-content:start!important;}
+  .auto-trades-panel{height:180px!important;max-height:180px!important;overflow:auto!important;}
+  .buy-formula-panel{height:190px!important;min-height:190px!important;max-height:190px!important;overflow:auto!important;align-self:stretch!important;}
+  .risk-link-panel{height:380px!important;max-height:380px!important;overflow:auto!important;}
+  .auto-right-stack{grid-template-rows:auto auto auto!important;align-content:start!important;}
+  .auto-sector-right{height:auto!important;min-height:220px!important;}
+  .auto-mid-grid{grid-template-columns:.9fr .9fr!important;}
+}
+</style>
+
+
+
+<!-- v27.42 position width restore + formula normal height + sticky only when vertical scroll needed -->
+<style>
+:root{--app-version-label:"v27.44-mock-account-order-strategy-compare";}
+/* 운영현황: 보유종목 영역을 2:1 비율의 고정 레이아웃으로 복구 */
+@media (min-width:1351px){
+  .ops-body-grid{
+    display:grid!important;
+    grid-template-columns:minmax(0,3.3fr) minmax(320px,.7fr)!important;
+    gap:10px!important;
+    align-items:start!important;
+  }
+  .ops-left-stack{min-width:0!important;width:100%!important;}
+  .ops-right-stack{min-width:460px!important;width:100%!important;}
+}
+.positions-panel{
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  overflow:auto!important;
+}
+.positions-panel table{
+  width:max-content!important;
+  min-width:100%!important;
+  table-layout:auto!important;
+}
+.positions-panel th,.positions-panel td{
+  min-width:auto!important;
+  white-space:nowrap!important;
+}
+.positions-panel th:nth-child(1),.positions-panel td:nth-child(1){min-width:210px!important;}
+.positions-panel th:nth-child(2),.positions-panel td:nth-child(2){min-width:90px!important;}
+.positions-panel th:nth-child(3),.positions-panel td:nth-child(3),
+.positions-panel th:nth-child(4),.positions-panel td:nth-child(4){min-width:120px!important;}
+.positions-panel th:nth-child(n+5),.positions-panel td:nth-child(n+5){min-width:120px!important;}
+.positions-panel th:nth-child(10),.positions-panel td:nth-child(10){min-width:100px!important;}
+/* 매수 금액 계산 공식: 필요 없는 큰 빈 영역 제거, 표 내용 기준으로 정상 표시 */
+.buy-formula-panel{
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow:auto!important;
+  align-self:stretch!important;
+}
+.buy-formula-panel table{width:100%!important;min-width:760px!important;}
+.buy-formula-panel h2{min-height:0!important;margin:0 0 8px 0!important;padding:0 0 0 0!important;}
+.buy-formula-panel .small{margin:8px 0 0!important;}
+/* 세로 스크롤이 필요한 표만 카드 제목/표 제목 고정. 필요 없는 표는 고정 해제. */
+.panel:not(.needs-vscroll) h2{
+  position:static!important;
+  top:auto!important;
+  margin:0 0 8px 0!important;
+  padding:0!important;
+  min-height:0!important;
+  box-shadow:none!important;
+}
+.panel:not(.needs-vscroll) h2::before{display:none!important;}
+.panel:not(.needs-vscroll) table th{
+  position:static!important;
+  top:auto!important;
+  z-index:auto!important;
+}
+.panel.needs-vscroll h2{
+  position:sticky!important;
+  top:0!important;
+  z-index:30!important;
+  margin:-10px -10px 8px -10px!important;
+  padding:10px 10px 8px 10px!important;
+  min-height:44px!important;
+  background:linear-gradient(180deg,#10283b 0%,#10283b 58%,#0a1b2a 100%)!important;
+  box-shadow:0 1px 0 #335b77,0 8px 12px #071522cc!important;
+}
+.panel.needs-vscroll h2::before{
+  content:"";position:absolute;left:0;right:0;top:-16px;height:16px;background:#10283b;z-index:-1;
+}
+.panel.needs-vscroll table th{
+  position:sticky!important;
+  top:44px!important;
+  z-index:25!important;
+  background:#17364d!important;
+  box-shadow:0 1px 0 #335b77,0 -1px 0 #335b77!important;
+}
+/* 세로 스크롤이 없는 작은 표는 헤더 고정에서 제외되어 자연스럽게 보인다. */
+.buy-formula-panel:not(.needs-vscroll) table th,
+.risk-link-panel:not(.needs-vscroll) table th,
+.auto-trades-panel:not(.needs-vscroll) table th{
+  position:static!important;
+}
+</style>
+
+</body></html>
