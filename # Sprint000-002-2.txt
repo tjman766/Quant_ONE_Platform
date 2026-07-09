@@ -1,0 +1,129 @@
+# Sprint000-002
+## S0002-001 Repository Foundation
+### ImpactAnalysis.md
+
+---
+
+# Sprint 정보
+
+| 항목 | 내용 |
+|------|------|
+| Sprint | Sprint000-002 |
+| Work Item | S0002-001 |
+| 작업명 | Repository Foundation - Python Build Standardization |
+| 상태 | Impact Analysis |
+| 기준 | kiwoom_1.zip |
+| 기준 브랜치 | main (Baseline) |
+
+---
+
+# 1. 목적
+
+Python 프로젝트의 설정을 표준화하여
+Repository Foundation을 강화한다.
+
+이번 작업은 기능 변경이 아니라
+개발 환경과 품질 관리 체계를 표준화하기 위한 작업이다.
+
+---
+
+# 2. 변경 대상
+
+변경 대상 파일
+
+- pyproject.toml
+
+관련 참고 파일
+
+- requirements.txt
+- requirements-dev.txt
+- .github/workflows/ci.yml
+
+---
+
+# 3. 변경 목적
+
+현재 Repository Audit에서 확인된 사항을 기준으로
+Python 프로젝트 설정을 표준화한다.
+
+목표는 다음과 같다.
+
+- Python 3.11.9 기준 명시
+- 프로젝트 메타데이터 관리
+- 개발 도구 설정 통합
+- CI와의 일관성 확보
+
+---
+
+# 4. 영향 분석
+
+## 영향 받는 영역
+
+- Python 개발 환경
+- IDE 설정
+- GitHub Actions
+- Local Development
+
+## 영향 받지 않는 영역
+
+- FastAPI 기능
+- Kiwoom API
+- OAuth
+- TokenManager
+- Trading Engine
+- WebSocket
+- UI
+- Database
+
+이번 변경은 기능 로직을 수정하지 않는다.
+
+---
+
+# 5. 위험도
+
+예상 위험도
+
+낮음(Low)
+
+이유
+
+- 기능 변경 없음
+- 설정 파일 변경
+- 실행 로직 변경 없음
+
+---
+
+# 6. 검증 계획
+
+변경 후 다음 항목을 검증한다.
+
+- Python 3.11.9 정상 인식
+- pytest 실행
+- GitHub Actions 정상 실행
+- 프로젝트 Import 오류 없음
+
+---
+
+# 7. Rollback
+
+문제가 발생할 경우
+
+기존 pyproject.toml로 복원한다.
+
+---
+
+# 8. 다음 작업
+
+다음 단계에서 수행할 작업
+
+- 현재 pyproject.toml 실제 내용 확인
+- 변경안 작성
+- Git Patch 생성
+- Commit Message 작성
+- Verification 문서 작성
+
+---
+
+Status
+
+Approved for Implementation
